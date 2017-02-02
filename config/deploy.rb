@@ -13,7 +13,7 @@ set :deploy_to, "/home/#{user}/#{rails_env}"
 set :deploy_via, :remote_cache
 set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/aws-my-key.pem) }
 
-after "deploy:update", :roles => :app do
+before "deploy:assets:precompile", roles: :app do
   run "/bin/cp #{shared_path}/config/database.yml #{release_path}/config/"
   run "/bin/cp #{shared_path}/config/unicorn.rb #{release_path}/config"
 end
