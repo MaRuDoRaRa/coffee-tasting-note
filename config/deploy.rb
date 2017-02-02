@@ -1,5 +1,7 @@
 require "bundler/capistrano"
 
+default_run_options[:shell] = "sh /etc/profile"
+
 set :application, "coffee-tasting-note"
 set :rails_env, "production"
 
@@ -12,11 +14,6 @@ set :use_sudo, false
 set :deploy_to, "/home/#{user}/#{rails_env}"
 set :deploy_via, :remote_cache
 set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/aws-my-key.pem) }
-
-set :default_environment, {
-    'RBENV_ROOT' => "/usr/local/rbenv",
-    'PATH' => "${RBENV_ROOT}/bin:${PATH}"
-}
 
 before "deploy:assets:precompile", roles: :app do
   run "/bin/cp #{shared_path}/config/database.yml #{release_path}/config/"
