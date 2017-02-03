@@ -45,4 +45,5 @@ gem 'therubyracer'
 gem 'unicorn'
 group :development do
   gem "capistrano-unicorn", require: false
+  gem 'capistrano-rbenv', require: false
 end

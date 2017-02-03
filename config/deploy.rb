@@ -1,6 +1,7 @@
 require "bundler/capistrano"
-
-default_run_options[:shell] = "sh /etc/profile"
+require "capistrano-rbenv"
+set :rbenv_path, "/usr/local/rbenv"
+set :rbenv_ruby_version, "2.4.0"
 
 set :application, "coffee-tasting-note"
 set :rails_env, "production"
