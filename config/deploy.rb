@@ -1,6 +1,5 @@
 require "bundler/capistrano"
 require "capistrano-rbenv"
-set :rbenv_path, "/usr/local/rbenv"
 set :rbenv_ruby_version, "2.4.0"
 
 set :application, "coffee-tasting-note"
@@ -20,3 +19,5 @@ before "deploy:assets:precompile", roles: :app do
   run "/bin/cp #{shared_path}/config/database.yml #{release_path}/config/"
   run "/bin/cp #{shared_path}/config/unicorn.rb #{release_path}/config"
 end
+
+require "capistrano-unicorn"
